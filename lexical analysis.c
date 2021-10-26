@@ -66,8 +66,8 @@ void token(char statement[], int start, int end){
 }
 
 int keyword(char tokenWord[]){
-    char keywords[50][50] = {"auto", "double", "int", "struct", "break", "else", "long", "switch", "case", "char", "return", "union", "continue", "for", "void", "do", "if", "static", "while", "default", "const", "float"};
-    for (int i = 0; i < 22; i++){
+    char keywords[50][50] = {"auto", "double", "int", "struct", "break", "else", "long", "switch", "case", "char", "return", "union", "continue", "for", "void", "do", "if", "static", "while", "default", "const", "float","main"};
+    for (int i = 0; i < 23; i++){
         if (!strcmp(keywords[i], tokenWord)){
             return TRUE;
         }
