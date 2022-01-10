@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include<string.h>
 
+
 char firstList[100],rules[100][100];
 int n,ind=0;
 
