@@ -15,5 +15,7 @@
 %%
 
 void main(){
+
     yylex();
+
 }
