@@ -2,6 +2,7 @@
 #include<string.h>
 
 void main(){
+    
     int i,j,k,l,flag;
     char input[100],rules[]="E+E",stack[100];
     printf("Enter the input string:");
