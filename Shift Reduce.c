@@ -2,45 +2,43 @@
 #include<string.h>
 
 void main(){
-    char stack[100]="\0",input[100],var,substr[3]="E+E";
-    int index=0,i,j,k,l,m,flag;
-    printf("Production\nE->E+E\nE->id\n");
+    int i,j,k,l,flag;
+    char input[100],rules[]="E+E",stack[100];
     printf("Enter the input string:");
     scanf("%s",input);
-    printf("Stack\tString\tAction\n");
-    for(i=0,j=0;i<strlen(input);i++){
-        var=input[i];
-        if(var >= 'a' && var <= 'z' || var=='+'){
-            printf("%s\t%s\tShift %c\n",stack,input,var);
-            stack[j]=var;
-            stack[j+1]='\0';
+    printf("Stack\tInput\tAction\n");
+    for(i=0;i<strlen(input);i++){
+        if(('a'<=input[i] && input[i]<='z') || input[i]=='+'){
+            printf("$%s\t%s$\tShift %c\n",stack,input,input[i]);
+            stack[strlen(stack)]=input[i];
             input[i]=' ';
         }
-        if(stack[j] >= 'a' && stack[j] <= 'z'){
-            printf("%s\t%s\tReduce E->id\n",stack,input);
-            stack[j]='E';
+        
+        for(j=0;j<strlen(stack);j++){
+            if('a'<=stack[j] && stack[j]<='z'){
+                printf("$%s\t%s$\tReduce E->i\n",stack,input);
+                stack[j]='E';
+            }
         }
-        for(k=0;k<strlen(stack);k++){
-            index=0;
+        
+        for(j=0;j<strlen(stack);j++){
             flag=1;
-            for(l=k;l<k+3 && strlen(stack)>=k+3;l++){
-                if(substr[index]!=stack[l]){
+            for(k=j;k<j+3;k++){
+                if(stack[k]!=rules[k-j]){
                     flag=0;
                     break;
                 }
-                index++;
             }
-            // substr[index]='\0';
-            if(flag==1 && index!=0){
-                printf("%s\t%s\tReduce E->E+E\n",stack,input);
-                for(l=k+1,m=k+4;l<strlen(stack);l++,m++){
-                    stack[l]=stack[m];
+            if(flag){
+                printf("$%s\t%s$\tReduce E->E+E\n",stack,input);
+                for(k=j+1;k<j+3;k++){
+                    stack[k]=stack[k+2];
                 }
-                stack[k]='E';
-                j=j-2;
+                stack[j]='E';
+                break;
             }
         }
-        j++;
     }
-    printf("%s\t%s\taccept",stack,input);
+    if(stack[0]=='E' && input[strlen(input)-1]==' ')
+        printf("$%c\t%s$\tAccept\n",stack[0],input);
 }
